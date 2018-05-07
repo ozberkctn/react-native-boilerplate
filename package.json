@@ -1,0 +1,38 @@
+{
+  "name": "boilerplate",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "apsl-react-native-button": "^3.1.1",
+    "axios": "^0.18.0",
+    "immutable": "^3.8.2",
+    "moment": "^2.22.1",
+    "react": "16.3.1",
+    "react-native": "0.55.3",
+    "react-native-google-analytics-bridge": "^5.6.3",
+    "react-native-keyboard-aware-scroll-view": "^0.5.0",
+    "react-native-loading-spinner-overlay": "^0.5.2",
+    "react-native-onesignal": "^3.1.4",
+    "react-native-sentry": "^0.36.0",
+    "react-native-splash-screen": "^3.0.6",
+    "react-native-vector-icons": "^4.6.0",
+    "react-navigation": "^1.5.12",
+    "react-redux": "^5.0.7",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "tcomb-form-native": "^0.6.11"
+  },
+  "devDependencies": {
+    "babel-jest": "22.4.3",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "22.4.3",
+    "react-test-renderer": "16.3.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
