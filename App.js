@@ -29,6 +29,8 @@ export const Tracker = new GoogleAnalyticsTracker("UA-41790788-3");
 type Props = {};
 export default class App extends Component<Props> {
   componentWillMount() {
+    OneSignal.inFocusDisplaying(2);
+    OneSignal.init("e5f04104-910d-44db-8cc1-09d69924fa08");
     OneSignal.addEventListener("received", this.onReceived);
     OneSignal.addEventListener("opened", this.onOpened);
   }

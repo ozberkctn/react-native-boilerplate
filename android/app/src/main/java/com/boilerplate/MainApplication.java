@@ -3,6 +3,8 @@ package com.boilerplate;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.microsoft.codepush.react.CodePush;
+import com.microsoft.codepush.react.ReactInstanceHolder;
 import com.oblador.vectoricons.VectorIconsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import io.sentry.RNSentryPackage;
@@ -18,7 +20,18 @@ import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
-  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+  public class MyReactNativeHost extends ReactNativeHost implements ReactInstanceHolder {
+
+
+    protected MyReactNativeHost(Application application) {
+      super(application);
+    }
+
+    @Override
+    protected String getJSBundleFile() {
+      return CodePush.getJSBundleFile();
+    }
+
     @Override
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
@@ -26,13 +39,15 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
+
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new VectorIconsPackage(),
-            new SplashScreenReactPackage(),
-            new RNSentryPackage(MainApplication.this),
-            new ReactNativeOneSignalPackage(),
-            new GoogleAnalyticsBridgePackage()
+              new MainReactPackage(),
+              new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
+              new VectorIconsPackage(),
+              new SplashScreenReactPackage(),
+              new RNSentryPackage(MainApplication.this),
+              new ReactNativeOneSignalPackage(),
+              new GoogleAnalyticsBridgePackage()
       );
     }
 
@@ -40,15 +55,20 @@ public class MainApplication extends Application implements ReactApplication {
     protected String getJSMainModuleName() {
       return "index";
     }
-  };
+  }
+
+  private final MyReactNativeHost myReactNativeHost = new MyReactNativeHost(this);
+
+
 
   @Override
   public ReactNativeHost getReactNativeHost() {
-    return mReactNativeHost;
+    return myReactNativeHost;
   }
 
   @Override
   public void onCreate() {
+    CodePush.setReactInstanceHolder(myReactNativeHost);
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
   }
