@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "Profiler": "https://reactnativeperformance.com/tools/Profiler.tar.gz?downloadKe",
     "apsl-react-native-button": "^3.1.1",
     "axios": "^0.18.0",
     "code-push": "^2.0.5",

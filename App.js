@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import Router from "./router/router";
 import OneSignal from "react-native-onesignal";
 import SplashScreen from "react-native-splash-screen";
+import Profiler from "Profiler";
 
 export const store = configureStore();
 
@@ -28,6 +29,10 @@ export const Tracker = new GoogleAnalyticsTracker("UA-41790788-3");
 
 type Props = {};
 export default class App extends Component<Props> {
+  constructor(props) {
+    super(props);
+    Profiler(this);
+  }
   componentWillMount() {
     OneSignal.inFocusDisplaying(2);
     OneSignal.init("e5f04104-910d-44db-8cc1-09d69924fa08");
