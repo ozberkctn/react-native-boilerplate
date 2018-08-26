@@ -33,7 +33,7 @@
         jsCodeLocation = [CodePush bundleURL];
     #endif
 RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"boilerplate"
+                                                      moduleName:@"Boilerplate"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
 

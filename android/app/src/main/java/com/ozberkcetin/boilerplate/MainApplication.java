@@ -1,4 +1,4 @@
-package com.boilerplate;
+package com.ozberkcetin.boilerplate;
 
 import android.app.Application;
 
