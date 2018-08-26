@@ -29,7 +29,7 @@ export const Tracker = new GoogleAnalyticsTracker("UA-41790788-3");
 
 type Props = {};
 export default class App extends Component<Props> {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     Profiler(this);
   }
@@ -45,11 +45,11 @@ export default class App extends Component<Props> {
     OneSignal.removeEventListener("opened", this.onOpened);
   }
 
-  onReceived(notification) {
+  onReceived(notification: Object) {
     console.log("Notification received: ", notification);
   }
 
-  onOpened(openResult) {
+  onOpened(openResult: Object) {
     console.log("Message: ", openResult.notification.payload.body);
     console.log("Data: ", openResult.notification.payload.additionalData);
     console.log("isActive: ", openResult.notification.isAppInFocus);
