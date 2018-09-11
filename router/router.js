@@ -3,99 +3,127 @@
  */
 
 import React from "react";
-import { Platform, ScrollView, StatusBar, Text } from "react-native";
 import {
-  StackNavigator,
-  createDrawerNavigator,
-  SafeAreaView,
-  DrawerNavigator
-} from "react-navigation";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import Button from "apsl-react-native-button";
-import SideMenu from "../components/SideMenu";
-import Icon from "react-native-vector-icons/FontAwesome";
+  Platform,
+  ScrollView,
+  StatusBar,
+  Text,
+  StyleSheet,
+  Image
+} from "react-native";
+import {
+  Scene,
+  Router,
+  Tabs,
+  Modal,
+  Drawer,
+  Stack,
+  Lightbox,
+  Actions
+} from "react-native-router-flux";
+import DrawerContent from "../screens/DrawerContent";
+import { Icon } from "react-native-elements";
+import TabView from "../screens/TabView";
+import { colors } from "../common/variables";
 
-const MyNavScreen = ({ navigation, banner }) => (
-  <ScrollView>
-    <SafeAreaView forceInset={{ top: "always" }}>
-      <Text>{banner}</Text>
-      <Button
-        style={{ backgroundColor: "red" }}
-        textStyle={{ fontSize: 18 }}
-        onPress={() => navigation.navigate("DrawerOpen")}
+const App = () => (
+  <Router>
+    <Stack key="root">
+      <Drawer
+        hideNavBar
+        key="drawer"
+        contentComponent={DrawerContent}
+        drawerIcon={() => <Image source={require("../images/menu.png")} />}
+        drawerWidth={300}
       >
-        Open drawer
-      </Button>
-      <Button onPress={() => navigation.navigate("Email")}>
-        Open other screen
-      </Button>
-      <Button onPress={() => navigation.goBack(null)}>Go back</Button>
-    </SafeAreaView>
-    <StatusBar barStyle="default" />
-  </ScrollView>
+        {/*
+                Wrapper Scene needed to fix a bug where the tabs would
+                reload as a modal ontop of itself
+              */}
+        <Scene hideNavBar panHandlers={null}>
+          <Tabs
+            key="tabbar"
+            routeName="tabbar"
+            backToInitial
+            swipeEnabled
+            showLabel={false}
+            tabBarStyle={styles.tabBarStyle}
+            activeBackgroundColor={colors.secondary}
+            inactiveBackgroundColor={colors.primary}
+          >
+            <Stack
+              key="tab_1"
+              title="Tab #1"
+              tabBarLabel="TAB #1"
+              inactiveBackgroundColor="#FFF"
+              activeBackgroundColor="#DDD"
+              icon={() => <Image source={require("../images/Tab1.png")} />}
+              navigationBarStyle={{ backgroundColor: colors.primary }}
+              titleStyle={{ color: "white", alignSelf: "center" }}
+              initial
+            >
+              <Scene key="tab_1_1" component={TabView} title="Tab #1_1" />
+
+              <Scene
+                key="tab_1_2"
+                component={TabView}
+                title="Tab #1_2"
+                titleStyle={{ color: "black", alignSelf: "center" }}
+              />
+            </Stack>
+
+            <Stack
+              key="tab_2"
+              title="Tab #2"
+              icon={() => <Image source={require("../images/Tab2.png")} />}
+              navigationBarStyle={{ backgroundColor: colors.primary }}
+            >
+              <Scene key="tab_2_1" component={TabView} title="Tab #2_1" />
+              <Scene key="tab_2_2" component={TabView} title="Tab #2_2" />
+            </Stack>
+
+            <Stack
+              key="tab_3"
+              icon={() => <Image source={require("../images/Tab3.png")} />}
+              title="Tab #3"
+              navigationBarStyle={{ backgroundColor: colors.primary }}
+            >
+              <Scene key="tab_3_1" component={TabView} />
+            </Stack>
+            <Scene
+              key="tab_4_1"
+              component={TabView}
+              title="Tab #4"
+              icon={() => <Image source={require("../images/Tab4.png")} />}
+            />
+            <Stack
+              key="tab_5"
+              icon={() => <Image source={require("../images/Tab5.png")} />}
+              title="Tab #5"
+              navigationBarStyle={{ backgroundColor: colors.primary }}
+            >
+              <Scene key="tab_5_1" component={TabView} />
+            </Stack>
+          </Tabs>
+        </Scene>
+      </Drawer>
+    </Stack>
+  </Router>
 );
 
-const InboxScreen = ({ navigation }) => (
-  <MyNavScreen banner={"Inbox Screen"} navigation={navigation} />
-);
-InboxScreen.navigationOptions = {
-  headerTitle: "Inbox"
-};
-
-const EmailScreen = ({ navigation }) => (
-  <MyNavScreen banner={"Email Screen"} navigation={navigation} />
-);
-
-const DraftsScreen = ({ navigation }) => (
-  <MyNavScreen banner={"Drafts Screen"} navigation={navigation} />
-);
-DraftsScreen.navigationOptions = {
-  headerTitle: "Drafts"
-};
-
-const InboxStack = StackNavigator({
-  Inbox: { screen: InboxScreen },
-  Email: { screen: EmailScreen }
-});
-
-InboxStack.navigationOptions = {
-  drawerLabel: "Inbox",
-  drawerIcon: ({ tintColor }) => (
-    <MaterialIcons
-      name="move-to-inbox"
-      size={24}
-      style={{ color: tintColor }}
-    />
-  )
-};
-
-const DraftsStack = StackNavigator({
-  Drafts: { screen: DraftsScreen },
-  Email: { screen: EmailScreen }
-});
-
-DraftsStack.navigationOptions = {
-  drawerLabel: "Drafts",
-  drawerIcon: ({ tintColor }) => (
-    <MaterialIcons name="drafts" size={24} style={{ color: tintColor }} />
-  )
-};
-
-const DrawerExample = DrawerNavigator(
-  {
-    Inbox: {
-      path: "/",
-      screen: InboxStack
-    },
-    Drafts: {
-      path: "/sent",
-      screen: DraftsStack
-    }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "transparent",
+    justifyContent: "center",
+    alignItems: "center"
   },
-  {
-    contentComponent: SideMenu,
-    drawerWidth: 300
+  tabBarStyle: {
+    backgroundColor: "#eee"
+  },
+  tabBarSelectedItemStyle: {
+    backgroundColor: "#ddd"
   }
-);
+});
 
-export default DrawerExample;
+export default App;
