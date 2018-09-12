@@ -19,4 +19,4 @@ if (__DEV__) {
   window.Lodash = require("lodash");
 }
 
-AppRegistry.registerComponent("Boilerplate", () => codePush({})(App));
+AppRegistry.registerComponent("OnlineKira", () => codePush({})(App));

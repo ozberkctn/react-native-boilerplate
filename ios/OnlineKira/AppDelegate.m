@@ -33,7 +33,7 @@
         jsCodeLocation = [CodePush bundleURL];
     #endif
 RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"Boilerplate"
+                                                      moduleName:@"OnlineKira"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
 

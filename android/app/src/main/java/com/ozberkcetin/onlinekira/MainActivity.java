@@ -1,4 +1,4 @@
-package com.ozberkcetin.Boilerplate;
+package com.ozberkcetin.onlinekira;
 
 import android.os.Bundle;
 
@@ -21,6 +21,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "Boilerplate";
+        return "OnlineKira";
     }
 }

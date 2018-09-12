@@ -1,4 +1,4 @@
-package com.ozberkcetin.boilerplate;
+package com.ozberkcetin.onlinekira;
 
 import android.app.Application;
 
@@ -8,7 +8,6 @@ import com.microsoft.codepush.react.ReactInstanceHolder;
 import com.oblador.vectoricons.VectorIconsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import io.sentry.RNSentryPackage;
-import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -46,7 +45,6 @@ public class MainApplication extends Application implements ReactApplication {
               new VectorIconsPackage(),
               new SplashScreenReactPackage(),
               new RNSentryPackage(MainApplication.this),
-              new ReactNativeOneSignalPackage(),
               new GoogleAnalyticsBridgePackage()
       );
     }

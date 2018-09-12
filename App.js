@@ -11,7 +11,6 @@ import { Sentry } from "react-native-sentry";
 import configureStore from "./redux/configureStore";
 import { Provider } from "react-redux";
 import Router from "./router/router";
-import OneSignal from "react-native-onesignal";
 import SplashScreen from "react-native-splash-screen";
 import Profiler from "Profiler";
 
@@ -32,28 +31,6 @@ export default class App extends Component<Props> {
   constructor(props: any) {
     super(props);
     Profiler(this);
-  }
-  componentWillMount() {
-    OneSignal.inFocusDisplaying(2);
-    OneSignal.init("e5f04104-910d-44db-8cc1-09d69924fa08");
-    OneSignal.addEventListener("received", this.onReceived);
-    OneSignal.addEventListener("opened", this.onOpened);
-  }
-
-  componentWillUnmount() {
-    OneSignal.removeEventListener("received", this.onReceived);
-    OneSignal.removeEventListener("opened", this.onOpened);
-  }
-
-  onReceived(notification: Object) {
-    console.log("Notification received: ", notification);
-  }
-
-  onOpened(openResult: Object) {
-    console.log("Message: ", openResult.notification.payload.body);
-    console.log("Data: ", openResult.notification.payload.additionalData);
-    console.log("isActive: ", openResult.notification.isAppInFocus);
-    console.log("openResult: ", openResult);
   }
 
   componentDidMount() {
