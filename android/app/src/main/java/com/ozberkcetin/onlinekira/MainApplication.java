@@ -3,6 +3,10 @@ package com.ozberkcetin.onlinekira;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.beefe.picker.PickerViewPackage;
+import com.horcrux.svg.SvgPackage;
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
+import com.kishanjvaghela.cardview.RNCardViewPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.microsoft.codepush.react.ReactInstanceHolder;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -41,6 +45,10 @@ public class MainApplication extends Application implements ReactApplication {
 
       return Arrays.<ReactPackage>asList(
               new MainReactPackage(),
+            new PickerViewPackage(),
+            new SvgPackage(),
+            new RNI18nPackage(),
+            new RNCardViewPackage(),
               new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
               new VectorIconsPackage(),
               new SplashScreenReactPackage(),

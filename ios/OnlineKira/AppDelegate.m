@@ -20,10 +20,17 @@
 
 @implementation AppDelegate
 
-@synthesize oneSignal = _oneSignal;
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
+  NSArray *fontFamilies = [UIFont familyNames];
+  
+  for (int i = 0; i < [fontFamilies count]; i++)
+  {
+    NSString *fontFamily = [fontFamilies objectAtIndex:i];
+    NSArray *fontNames = [UIFont fontNamesForFamilyName:[fontFamilies objectAtIndex:i]];
+    NSLog (@"%@: %@", fontFamily, fontNames);
+  }
   NSURL *jsCodeLocation;
 
   
@@ -41,17 +48,15 @@ RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
-  //ONE SIGNAL
-  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
-                                                         appId:@"id"
-                                                      settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNotification), kOSSettingsKeyAutoPrompt : @YES}];
+  
+  
   
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [SplashScreen show];
+//  [SplashScreen showr];
   return YES;
 }
 

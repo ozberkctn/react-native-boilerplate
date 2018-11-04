@@ -14,14 +14,21 @@
   "dependencies": {
     "Profiler": "https://reactnativeperformance.com/tools/Profiler.tar.gz?downloadKe",
     "apsl-react-native-button": "^3.1.1",
+    "autosuggest": "0.0.2",
     "axios": "^0.18.0",
+    "base-64": "^0.1.0",
     "code-push": "^2.0.5",
     "immutable": "^3.8.2",
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
     "react": "16.3.1",
     "react-native": "0.55.3",
+    "react-native-app-intro-slider": "^1.0.1",
+    "react-native-autocomplete-input": "^3.6.0",
+    "react-native-awesome-alerts": "^1.1.1",
     "react-native-button": "^2.3.0",
+    "react-native-cardview": "^1.1.5",
+    "react-native-carousel": "^0.11.0",
     "react-native-code-push": "^5.3.4",
     "react-native-collapsible": "^0.13.0",
     "react-native-elements": "^0.19.1",
@@ -29,15 +36,27 @@
     "react-native-i18n": "^2.0.12",
     "react-native-keyboard-aware-scroll-view": "^0.5.0",
     "react-native-loading-spinner-overlay": "^0.5.2",
+    "react-native-modal": "^6.5.0",
+    "react-native-modal-datetime-picker": "^6.0.0",
+    "react-native-percent-circle": "0.0.6",
+    "react-native-percentage-circle": "^1.0.7",
+    "react-native-picker": "^4.3.7",
+    "react-native-responsive-dimensions": "^1.0.2",
     "react-native-router-flux": "^4.0.1",
+    "react-native-scrollable-tab-view": "^0.8.0",
     "react-native-sentry": "^0.36.0",
     "react-native-splash-screen": "^3.0.6",
+    "react-native-svg": "^7.0.3",
     "react-native-swiper": "git+https://github.com/SekizKreatif/react-native-swiper.git",
+    "react-native-tab-view": "^1.0.2",
     "react-native-vector-icons": "^4.6.0",
     "react-redux": "^5.0.7",
+    "recyclerlistview": "^1.3.4",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "render-if": "^0.1.1",
+    "styled-components": "^3.4.6",
     "tcomb-form-native": "^0.6.11"
   },
   "devDependencies": {
@@ -54,5 +73,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
   }
 }

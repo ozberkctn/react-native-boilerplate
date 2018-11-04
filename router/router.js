@@ -9,7 +9,9 @@ import {
   StatusBar,
   Text,
   StyleSheet,
-  Image
+  Image,
+  TouchableOpacity,
+  View
 } from "react-native";
 import {
   Scene,
@@ -25,15 +27,60 @@ import DrawerContent from "../screens/DrawerContent";
 import { Icon } from "react-native-elements";
 import TabView from "../screens/TabView";
 import { colors } from "../common/variables";
+import HomePage from "../screens/HomePage";
+import LoginScreen from "../screens/LoginScreen";
+import RealEstates from "../screens/RealEstates";
+import EstateDetail from "../screens/EstateDetail";
+import PersonalDetails from "../screens/PersonalDetails";
+import HirePaymentInformation from "../screens/HirePaymentInformation";
+import AggrementsDetail from "../screens/AggrementsDetail";
+import EstatesForSale from "../screens/EstatesForSale";
+import Reports from "../screens/Reports";
+import TransactionsReport from "../screens/TransactionsReport";
+import AggrementsMenu from "../screens/AggrementsMenu";
+import Aggrements from "../screens/Aggrements";
+import VadesiYaklasanlar from "../screens/VadesiYaklasanlar";
+import EstateProperties from "../screens/EstateProperties";
+import Sikayetler from "../screens/Sikayetler";
+import ContactUs from "../screens/ContactUs";
+import TaxCalculate from "../screens/TaxCalculate";
+import OfferDetail from "../screens/OfferDetail";
+import ForgotPassword from "../screens/ForgotPassword";
+import Borclar from "../screens/Borclar";
+
+const DrawerMenuButton = props => {
+  return (
+    <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <TouchableOpacity
+        onPress={() => Actions.drawerOpen()}
+        style={{ marginLeft: 5, paddingLeft: 10, paddingRight: 10 }}
+      >
+        <Image resizeMode="center" source={require("../images/menu.png")} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => Actions.pop()}
+        style={{ paddingRight: 15, paddingLeft: 10 }}
+      >
+        <Image resizeMode="center" source={require("../images/back.png")} />
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const App = () => (
   <Router>
-    <Stack key="root">
+    <Stack
+      key="root"
+      navigationBarStyle={{ backgroundColor: colors.primary }}
+      titleStyle={{ color: "white", alignSelf: "center" }}
+    >
       <Drawer
         hideNavBar
         key="drawer"
         contentComponent={DrawerContent}
-        drawerIcon={() => <Image source={require("../images/menu.png")} />}
+        drawerIcon={() => (
+          <Image resizeMode="center" source={require("../images/menu.png")} />
+        )}
         drawerWidth={300}
       >
         {/*
@@ -41,72 +88,147 @@ const App = () => (
                 reload as a modal ontop of itself
               */}
         <Scene hideNavBar panHandlers={null}>
-          <Tabs
-            key="tabbar"
-            routeName="tabbar"
-            backToInitial
-            swipeEnabled
-            showLabel={false}
-            tabBarStyle={styles.tabBarStyle}
-            activeBackgroundColor={colors.secondary}
-            inactiveBackgroundColor={colors.primary}
+          <Stack
+            key="tab_1"
+            title="Tab #1"
+            tabBarLabel="TAB #1"
+            inactiveBackgroundColor="#FFF"
+            activeBackgroundColor="#DDD"
+            icon={() => <Image source={require("../images/Tab1.png")} />}
+            navigationBarStyle={{ backgroundColor: colors.primary }}
+            titleStyle={{ color: "white", alignSelf: "center" }}
+            initial
           >
-            <Stack
-              key="tab_1"
-              title="Tab #1"
-              tabBarLabel="TAB #1"
-              inactiveBackgroundColor="#FFF"
-              activeBackgroundColor="#DDD"
-              icon={() => <Image source={require("../images/Tab1.png")} />}
-              navigationBarStyle={{ backgroundColor: colors.primary }}
-              titleStyle={{ color: "white", alignSelf: "center" }}
-              initial
-            >
-              <Scene key="tab_1_1" component={TabView} title="Tab #1_1" />
-
-              <Scene
-                key="tab_1_2"
-                component={TabView}
-                title="Tab #1_2"
-                titleStyle={{ color: "black", alignSelf: "center" }}
-              />
-            </Stack>
-
-            <Stack
-              key="tab_2"
-              title="Tab #2"
-              icon={() => <Image source={require("../images/Tab2.png")} />}
-              navigationBarStyle={{ backgroundColor: colors.primary }}
-            >
-              <Scene key="tab_2_1" component={TabView} title="Tab #2_1" />
-              <Scene key="tab_2_2" component={TabView} title="Tab #2_2" />
-            </Stack>
-
-            <Stack
-              key="tab_3"
-              icon={() => <Image source={require("../images/Tab3.png")} />}
-              title="Tab #3"
-              navigationBarStyle={{ backgroundColor: colors.primary }}
-            >
-              <Scene key="tab_3_1" component={TabView} />
-            </Stack>
             <Scene
-              key="tab_4_1"
-              component={TabView}
-              title="Tab #4"
-              icon={() => <Image source={require("../images/Tab4.png")} />}
+              panHandlers={null}
+              hideNavBar
+              key="Login"
+              component={LoginScreen}
+              title="Üye Girişi"
             />
-            <Stack
-              key="tab_5"
-              icon={() => <Image source={require("../images/Tab5.png")} />}
-              title="Tab #5"
-              navigationBarStyle={{ backgroundColor: colors.primary }}
-            >
-              <Scene key="tab_5_1" component={TabView} />
-            </Stack>
-          </Tabs>
+            <Scene key="HomePage" component={HomePage} title="Anasayfa" />
+            <Scene
+              key="RealEstates"
+              component={RealEstates}
+              title="Gayrimenkuller"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="Borclar"
+              component={Borclar}
+              title="Borçlar"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="EstateDetail"
+              component={EstateDetail}
+              title="Gayrimenkul Detay"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="PersonalDetails"
+              component={PersonalDetails}
+              title="Kişisel Bilgiler"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="HirePaymentInformation"
+              component={HirePaymentInformation}
+              title="Kira Ödeme Bilgileri"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="AggrementsDetail"
+              component={AggrementsDetail}
+              title="Kiracı Sözleşme Detay"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="EstatesForSale"
+              component={EstatesForSale}
+              title="Satılık Gayrimenkuller"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="Reports"
+              component={Reports}
+              title="Raporlar"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="TransactionsReport"
+              component={TransactionsReport}
+              title="Para Hareketleri"
+              renderLeftButton={<DrawerMenuButton />}
+              // back
+              // backButtonTintColor={colors.white}
+            />
+            <Scene
+              key="AggrementsMenu"
+              component={AggrementsMenu}
+              title="Sözleşmeler"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="Aggrements"
+              component={Aggrements}
+              title="Sözleşmeler"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="VadesiYaklasanlar"
+              component={VadesiYaklasanlar}
+              title="Vadesi Yaklaşan Sözleşmeler"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="EstateProperties"
+              component={EstateProperties}
+              title="Daire Özellikleri"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="Sikayetler"
+              component={Sikayetler}
+              title="Tadilat - Tamirat"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="Contact"
+              component={ContactUs}
+              title="İletişim"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+
+            <Scene
+              key="TaxCalculate"
+              component={TaxCalculate}
+              title="Vergi Hesapla"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+            <Scene
+              key="OfferDetail"
+              component={OfferDetail}
+              title="Teklif Detayları"
+              renderLeftButton={<DrawerMenuButton />}
+            />
+          </Stack>
         </Scene>
       </Drawer>
+      <Scene
+        key="SingleContact"
+        component={ContactUs}
+        title="İletişim"
+        back
+        backButtonTintColor={colors.white}
+      />
+      <Scene
+        key="ForgotPassword"
+        component={ForgotPassword}
+        title="Şifremi Unuttum"
+        back
+        backButtonTintColor={colors.white}
+      />
     </Stack>
   </Router>
 );
