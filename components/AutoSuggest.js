@@ -33,6 +33,7 @@ class AutoSuggest extends Component {
     return (
       <View style={{ flex: 1 }}>
         <TextInput
+          underlineColorAndroid="transparent"
           placeholder={placeholder}
           style={{
             fontFamily: "Roboto-Regular",
@@ -45,7 +46,6 @@ class AutoSuggest extends Component {
             paddingRight: 5
           }}
           onChangeText={selectedItem => this.props.onChangeText(selectedItem)}
-          value={this.state.selectedItem}
         />
         {/* <ScrollView
           onBlur={() => {

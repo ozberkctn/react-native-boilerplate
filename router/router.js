@@ -50,18 +50,29 @@ import Borclar from "../screens/Borclar";
 
 const DrawerMenuButton = props => {
   return (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
+    <View
+      style={{
+        flexDirection: "row",
+        alignItems: "center"
+      }}
+    >
       <TouchableOpacity
         onPress={() => Actions.drawerOpen()}
-        style={{ marginLeft: 5, paddingLeft: 10, paddingRight: 10 }}
+        style={{
+          marginLeft: 5,
+          paddingLeft: 10,
+          paddingTop: 10,
+          paddingBottom: 10
+        }}
       >
         <Image resizeMode="center" source={require("../images/menu.png")} />
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => Actions.pop()}
-        style={{ paddingRight: 15, paddingLeft: 10 }}
-      >
-        <Image resizeMode="center" source={require("../images/back.png")} />
+      <TouchableOpacity onPress={() => Actions.pop()} style={{ padding: 10 }}>
+        <Image
+          style={{ width: 20, height: 20 }}
+          resizeMode="contain"
+          source={require("../images/tale_back.png")}
+        />
       </TouchableOpacity>
     </View>
   );

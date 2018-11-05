@@ -14,6 +14,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import axios from "axios";
 import { MAIN_URL } from "../redux/actions/actionTypes";
 import isEmpty from "lodash/isEmpty";
+import { Actions } from "react-native-router-flux";
 
 class ContactUs extends Component {
   state = {
@@ -50,7 +51,15 @@ class ContactUs extends Component {
             () =>
               Alert.alert(
                 "",
-                "Mesajınız gönderilmiştir. En kısa sürede size yanıt verilecektir teşekkürler."
+                "Mesajınız gönderilmiştir. En kısa sürede size yanıt verilecektir teşekkürler.",
+                [
+                  {
+                    text: "Tamam",
+                    onPress: () => {
+                      Actions.pop();
+                    }
+                  }
+                ]
               ),
             1000
           )

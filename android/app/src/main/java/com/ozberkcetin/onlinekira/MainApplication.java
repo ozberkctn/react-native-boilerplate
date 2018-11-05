@@ -11,7 +11,6 @@ import com.microsoft.codepush.react.CodePush;
 import com.microsoft.codepush.react.ReactInstanceHolder;
 import com.oblador.vectoricons.VectorIconsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
-import io.sentry.RNSentryPackage;
 import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -52,7 +51,6 @@ public class MainApplication extends Application implements ReactApplication {
               new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
               new VectorIconsPackage(),
               new SplashScreenReactPackage(),
-              new RNSentryPackage(MainApplication.this),
               new GoogleAnalyticsBridgePackage()
       );
     }

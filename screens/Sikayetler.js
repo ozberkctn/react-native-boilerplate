@@ -85,7 +85,7 @@ class Sikayetler extends Component {
           key="1"
           sections={sikayetler}
           renderHeader={this.renderHeader}
-          renderContent={this.renderContent}
+          renderContent={this.renderContent.bind(this)}
           underlayColor="transparent"
         />
         <Modal isVisible={openImageModal}>

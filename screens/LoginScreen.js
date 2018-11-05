@@ -32,6 +32,7 @@ class LoginScreen extends Component {
 
   async componentWillMount() {
     const username = await AsyncStorage.getItem("username");
+    // const isFirstEnter = await AsyncStorage.getItem("isFirstEnter");
     const isFirstEnter = await AsyncStorage.getItem("isFirstEnter");
 
     debugger;
@@ -85,7 +86,9 @@ class LoginScreen extends Component {
 
     if (this.state.showRealApp == undefined) {
       return <Loading show={true} />;
-    } else if (this.state.showRealApp) {
+    }
+    // else if (this.state.showRealApp) {
+    else {
       return (
         <KeyboardAwareScrollView style={styles.container}>
           <Loading show={loginIsLoading} />
@@ -197,20 +200,21 @@ class LoginScreen extends Component {
           )}
         </KeyboardAwareScrollView>
       );
-    } else {
-      return (
-        <AppIntroSlider
-          slides={[
-            {
-              key: "somethun2",
-              title: "No need to buy me beer",
-              text: "Usage is all free"
-            }
-          ]}
-          renderItem={this.renderItem}
-          onDone={this._onDone}
-        />
-      );
+      // } else {
+      //   return (
+      //     <AppIntroSlider
+      //       slides={[
+      //         {
+      //           key: "somethun2",
+      //           title: "No need to buy me beer",
+      //           text: "Usage is all free"
+      //         }
+      //       ]}
+      //       renderItem={this.renderItem}
+      //       onDone={this._onDone}
+      //     />
+      //   );
+      // }
     }
   }
 }
