@@ -19,6 +19,7 @@ import renderIf from "render-if";
 import { responsiveHeight } from "react-native-responsive-dimensions";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AppIntroSlider from "react-native-app-intro-slider";
+import Video from "react-native-video";
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -43,7 +44,8 @@ class LoginScreen extends Component {
       this.props.login(username, password);
     } else {
       this.setState({
-        showRealApp: isFirstEnter ? false : false
+        showRealApp:
+          isFirstEnter == true || isFirstEnter == undefined ? false : true
       });
     }
   }
@@ -61,19 +63,46 @@ class LoginScreen extends Component {
     this.setState({ showRealApp: true });
   };
 
+  videoClicked() {
+    this.setState({ openVideo: true });
+  }
+
   renderItem(props) {
     return (
       <View
         style={{
-          backgroundColor: colors.primary,
+          backgroundColor: "black",
           width: props.width,
-          height: props.height
+          height: props.height + 50
         }}
       >
-        <Image
-          source={require("../images/white_logo.png")}
-          style={{ marginTop: 100, alignSelf: "center" }}
+        <Video
+          repeat={true}
+          source={{
+            uri:
+              "https://res.cloudinary.com/dfe0fvosl/video/upload/v1542545369/onllineKira_2.mp4"
+          }} // Can be a URL or a local file.
+          style={styles.backgroundVideo}
         />
+      </View>
+    );
+  }
+
+  _renderDoneButton() {
+    return (
+      <View
+        style={{
+          backgroundColor: colors.primary,
+          width: 200,
+          height: 50,
+          borderRadius: 40,
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Text style={{ color: "white", fontSize: 16 }}>
+          Tanıtım Videosunu Geç
+        </Text>
       </View>
     );
   }
@@ -86,9 +115,8 @@ class LoginScreen extends Component {
 
     if (this.state.showRealApp == undefined) {
       return <Loading show={true} />;
-    }
-    // else if (this.state.showRealApp) {
-    else {
+    } else if (this.state.showRealApp == true) {
+      // else {
       return (
         <KeyboardAwareScrollView style={styles.container}>
           <Loading show={loginIsLoading} />
@@ -185,6 +213,20 @@ class LoginScreen extends Component {
               Şifremi Unuttum
             </Text>
           </TouchableOpacity>
+          {/* <TouchableOpacity
+            onPress={() => this.setState({ showRealApp: false })}
+          >
+            <Text
+              style={{
+                marginTop: 40,
+                color: colors.primary,
+                alignSelf: "center"
+              }}
+            >
+              Tanıtım Videosunu İzle
+            </Text>
+          </TouchableOpacity> */}
+
           {canShowErrorAlert(
             <AwesomeAlert
               show={loginHasError}
@@ -200,23 +242,24 @@ class LoginScreen extends Component {
           )}
         </KeyboardAwareScrollView>
       );
-      // } else {
-      //   return (
-      //     <AppIntroSlider
-      //       slides={[
-      //         {
-      //           key: "somethun2",
-      //           title: "No need to buy me beer",
-      //           text: "Usage is all free"
-      //         }
-      //       ]}
-      //       renderItem={this.renderItem}
-      //       onDone={this._onDone}
-      //     />
-      //   );
-      // }
+    } else {
+      return (
+        <AppIntroSlider
+          slides={[
+            {
+              key: "somethun2",
+              title: "No need to buy me beer",
+              text: "Usage is all free"
+            }
+          ]}
+          renderItem={this.renderItem}
+          onDone={this._onDone}
+          renderDoneButton={this._renderDoneButton}
+        />
+      );
     }
   }
+  // }
 }
 
 const styles = StyleSheet.create({
@@ -224,6 +267,14 @@ const styles = StyleSheet.create({
   image: {
     width: 320,
     height: 320
+  },
+  backgroundVideo: {
+    zIndex: 99999,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0
   }
 });
 

@@ -38,6 +38,7 @@ class VadesiYaklasanlar extends PureComponent {
   }
   render() {
     const { vadesiYaklasanlar, getVadesiYaklasanlarAreLoading } = this.props;
+    debugger;
     return (
       <View style={styles.container}>
         <Loading show={getVadesiYaklasanlarAreLoading} />

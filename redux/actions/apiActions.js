@@ -189,7 +189,7 @@ export const getVadesiYaklasanlar = token => {
   return dispatch => {
     dispatch({ type: GET_VADESI_YAKLASANLAR.REQUEST });
     axios
-      .get(`${MAIN_URL}/vadesi-yaklasanlar/`, {
+      .get(`${MAIN_URL}/vadesi-yaklasan-sozlesmeler/`, {
         headers: {
           Authorization: token
         }

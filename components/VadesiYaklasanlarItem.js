@@ -11,12 +11,14 @@ class VadesiYaklasanlarItem extends PureComponent {
   }
   render() {
     const {
-      item: { tarih, tutar, tur, aciklama, parabirimi }
+      item: { baslangic, kira, info }
     } = this.props;
-    const createdDay = moment(tarih, "YYYY-MM-DD").format("DD");
-    const createdMonthAndYear = moment(tarih, "YYYY-MM-DD").format("MMM YYYY");
+    const createdDay = moment(baslangic, "YYYY-MM-DD").format("DD");
+    const createdMonthAndYear = moment(baslangic, "YYYY-MM-DD").format(
+      "MMM YYYY"
+    );
 
-    const aciklamaArray = aciklama.split("|");
+    const aciklamaArray = info.split("|");
     const address =
       aciklamaArray[2].trim() + " " + aciklamaArray[3].trim().split(" ")[0];
     const daire = aciklamaArray[3].split(" ")[1];
@@ -62,7 +64,7 @@ class VadesiYaklasanlarItem extends PureComponent {
               fontFamily: "Roboto-Regular"
             }}
           >
-            {tur}
+            Kira
           </Text>
           <Text
             style={{
@@ -99,7 +101,7 @@ class VadesiYaklasanlarItem extends PureComponent {
               fontFamily: "Roboto-Regular"
             }}
           >
-            {Number(tutar).toLocaleString("it-IT", {
+            {Number(kira).toLocaleString("it-IT", {
               style: "currency",
               currency: "TRY",
               minimumFractionDigits: 2

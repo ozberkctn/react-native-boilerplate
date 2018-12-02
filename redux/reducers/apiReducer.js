@@ -23,7 +23,7 @@ const INITIAL_STATE = {
   charts: {
     gayrimenkul_doluluk: 100,
     para_giris_cikis: [],
-    toplam_depozito: []
+    toplam_depozito: [{ parabirimi: 1 }]
   },
   projects: [],
   getSikayetlerAreLoading: false,

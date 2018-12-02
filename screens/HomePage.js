@@ -16,6 +16,7 @@ import PieChart from "../components/PieChart";
 import { getCharts } from "../redux/actions/apiActions";
 import isEmpty from "lodash/isEmpty";
 import Carousel from "react-native-carousel";
+import { currency } from "../common/constants";
 const screenWidth = Dimensions.get("window").width;
 
 const leftMenus = [
@@ -84,7 +85,9 @@ class HomePage extends Component {
     });
 
     const percentage =
-      ((totalParaGiris + totalParaCikis) / totalParaGiris) * 100;
+      totalParaGiris == 0
+        ? 0
+        : ((totalParaGiris + totalParaCikis) / totalParaGiris) * 100;
     return percentage;
   }
 
@@ -95,7 +98,7 @@ class HomePage extends Component {
         totalDepozito += Number(value.toplam);
       }
     });
-    return totalDepozito;
+    return `${totalDepozito}`;
   }
   render() {
     const { charts } = this.props;
@@ -105,46 +108,126 @@ class HomePage extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <View style={{ backgroundColor: "white", height: 295 }}>
+        <View style={{ backgroundColor: "white", height: 395 }}>
           <Carousel
             width={screenWidth}
             animate={false}
-            indicatorAtBottom={false}
             indicatorColor="#00BFFF"
             indicatorSize={40}
+            indicatorAtBottom={false}
+            indicatorOffset={350}
           >
-            <View style={styles.chartContainer}>
-              <PieChart
-                onClickFilledArea={() => {
-                  console.log("asdads");
-                }}
-                title="Gayrimenkul Doluluk Oranları"
-                percentage={100 - charts.gayrimenkul_doluluk}
-              />
-            </View>
-            <View style={styles.chartContainer}>
-              <PieChart
-                onClickFilledArea={() => {
-                  console.log("asdads");
-                }}
-                title="Kira Ödeme Oranları"
-                title1="Ödenmiş"
-                percentage={100 - charts.kira_yuzde}
-                title2="Ödenmemiş"
-              />
-            </View>
-            <View style={styles.chartContainer}>
-              <PieChart
-                onClickFilledArea={() => {
-                  console.log("asdads");
-                }}
-                title="Para Giriş Çıkış"
-                percentage={100 - paraGirisCikis}
-              />
-            </View>
-            <View style={styles.despositContainer}>
+            <View
+              style={{
+                width: screenWidth,
+                backgroundColor: "white",
+                alignItems: "center",
+                justifyContent: "center",
+                paddingTop: 10
+              }}
+            >
               <Text
                 style={{
+                  color: colors.primary,
+                  marginTop: 10,
+                  fontSize: 18,
+                  fontFamily: "Roboto-Medium"
+                }}
+              >
+                Gayrimenkul Doluluk Oranı
+              </Text>
+              <Image
+                resizeMode="contain"
+                style={{ height: 300, marginTop: 20 }}
+                source={require("../images/gayrimenkul_sayisi_grafik.png")}
+              />
+              <Text
+                style={{
+                  position: "absolute",
+                  top: 73,
+                  right: 124,
+                  fontSize: 26,
+                  fontFamily: "Roboto-Bold"
+                }}
+              >
+                {charts.gayrimenkul_doluluk}
+              </Text>
+            </View>
+            <View
+              style={{
+                width: screenWidth,
+                backgroundColor: "white",
+                alignItems: "center",
+                justifyContent: "center",
+                paddingTop: 10
+              }}
+            >
+              <Text
+                style={{
+                  color: colors.primary,
+                  marginTop: 10,
+                  fontSize: 18,
+                  fontFamily: "Roboto-Medium"
+                }}
+              >
+                Kira Ödeme Oranı
+              </Text>
+              <Image
+                resizeMode="contain"
+                style={{ height: 300, marginTop: 20 }}
+                source={require("../images/kira_odeme_orani_chart.png")}
+              />
+              <Text
+                style={{
+                  position: "absolute",
+                  top: 75,
+                  right: 192,
+                  fontSize: 24,
+                  fontFamily: "Roboto-Bold"
+                }}
+              >
+                {charts.kira_yuzde}
+              </Text>
+            </View>
+            <View style={styles.chartContainer}>
+              {paraGirisCikis == 0 ? (
+                <View
+                  style={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100%"
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: colors.primary,
+                      marginTop: 10,
+                      fontSize: 18,
+                      fontFamily: "Roboto-Medium"
+                    }}
+                  >
+                    Henüz Para Giriş Çıkış Bilgisi Yok
+                  </Text>
+                </View>
+              ) : (
+                <PieChart
+                  onClickFilledArea={() => {
+                    console.log("asdads");
+                  }}
+                  title="Para Giriş Çıkış"
+                  percentage={100 - paraGirisCikis}
+                />
+              )}
+            </View>
+            <View style={styles.despositContainer}>
+              <Image
+                resizeMode="contain"
+                style={{ height: 70 }}
+                source={require("../images/deposit_icon.png")}
+              />
+              <Text
+                style={{
+                  marginTop: 20,
                   fontSize: 24,
                   fontFamily: "Roboto-Medium",
                   color: colors.primary
@@ -160,13 +243,10 @@ class HomePage extends Component {
                   marginTop: 20
                 }}
               >
-                {this.calculateTotalDepozito(
-                  charts.toplam_depozito
-                ).toLocaleString("it-IT", {
-                  style: "currency",
-                  currency: "TRY",
-                  minimumFractionDigits: 2
-                })}
+                {this.calculateTotalDepozito(charts.toplam_depozito).replace(
+                  /\B(?=(\d{3})+(?!\d))/g,
+                  "."
+                ) + currency[charts.toplam_depozito[0].parabirimi]}
               </Text>
             </View>
           </Carousel>
